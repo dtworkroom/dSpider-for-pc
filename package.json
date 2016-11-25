@@ -4,7 +4,7 @@
   "description": "dSpider",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "./electron .",
     "win":"electron-packager . --platform=win32  --out=dist/ --overwrite --ignore .idea  --ignore=node_modules/electron-* --ignore=node_modules/.bin --ignore=.git --ignore=result  --ignore=dist --prune",
     "mac":"electron-packager . --platform=mas --arch=x64  --out=dist/ --overwrite --ignore .idea  --ignore=node_modules/electron-* --ignore=node_modules/.bin --ignore=.git --ignore=result  --ignore=dist --prune"
   },
