@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!--<title>dSpider Dev-tools</title>-->
+    <link rel="stylesheet" href="http://fonts.lug.ustc.edu.cn/css?family=Roboto:400,300,500&subset=latin" media="all">
+    <link href="http://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <script src="js/neat.min.js" ></script>
+  </head>
+  <script>
+  </script>
+  <style>
+    body{
+      background: #ddd;
+    }
+    #toolbar{
+      display: flex;
+      align-items:center;
+      background: #ebebeb;
+      border-bottom: #bbb 1px solid;
+      position: fixed;
+      height: 44px;
+      width: 100%;
+    }
+    i{
+      margin-left: 5px;
+      color: #777;
+      cursor: pointer;
+    }
+    .phone{
+      color: dodgerblue
+    }
+    i:hover{color: dodgerblue}
+    input{
+      color: #666;
+      display: block;
+      padding: 5px 8px 5px 6px ;
+      flex: 1;
+      font-size: 14px;
+      margin:0 10px;
+      outline: none;
+      border: #bbb 1px solid;
+      border-radius: 3px;
+    }
+    input:focus{
+      border-color: #2e8bcc;
+    }
+    .disabled,.disabled:hover{
+      color:#ddd;
+    }
+    webview{
+      height: 90%;
+      padding-top: 44px;
+      margin: 0px auto;
+    }
+
+    .progress{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items:center;
+      z-index: 1000;
+      background: #eee;
+      left:0;
+      top: 45px;
+    }
+    .progress>*{
+      margin: 0 auto;
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      background-color: #2e8bcc;
+      margin: 20px auto;
+      -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+      animation: rotateplane 1.2s infinite ease-in-out;
+    }
+    #loading-text{
+      text-align: center;
+      color: #777;
+    }
+
+    button{
+      border:#2e8bcc 1px solid ;
+      background: #eee;
+      color:#2e8bcc  ;
+      transition: all .4s;
+    }
+    button:hover{
+      background: #2e8bcc;
+      color: #eee;
+    }
+
+    @-webkit-keyframes rotateplane {
+      0% { -webkit-transform: perspective(120px) }
+      50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+      100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+    }
+
+    @keyframes rotateplane {
+      0% {
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+      } 50% {
+          transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+          -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+        } 100% {
+            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+            -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+          }
+    }
+
+  </style>
+  <body>
+  <div id="toolbar">
+    <i class="material-icons disabled" id="back">arrow_back</i>
+    <i class="material-icons disabled" id="forward">arrow_forward</i>
+    <i class="material-icons" id="refresh">refresh</i>
+    <input id="url-edit" type="search" name="url" placeholder="input start-url and press enter! " autofocus>
+    <i class="material-icons" id="device">phone_iphone</i>
+    <i class="material-icons" id="debug" style="margin-right: 10px">build</i>
+  </div>
+ <!--<webview src="http://gsw.iguoxue.org" preload="./preload.js"  disablewebsecurity ></webview>-->
+  <webview  preload="./preload.js"  disablewebsecurity ></webview>
+  <div class="progress" id="loading">
+    <div>
+      <div class="spinner"></div>
+      <div id="loading-text">正在爬取...</div>
+      <button style="width: 140px; padding: 10px 0; margin: 0 auto; text-align: center">
+        查看结果
+      </button>
+    </div>
+  </div>
+
+  </body>
+  <script>
+    const path = require('path')
+    const fs=require("fs");
+   function showResultBtn(){
+     $("#loading-text,.spinner").hide()
+     btn.show()
+   }
+
+   function getResultPath(){
+      var p=path.join(__dirname,"./result/")
+      if (!fs.existsSync(p)) {
+         fs.mkdirSync(p);
+      }
+     return path.join(__dirname,"./result/");
+   }
+   var btn=$("button").hide();
+   var webview=$("webview")[0];
+   var loading=$("#loading").hide();
+   var loadingText=$("#loading-text");
+   require('./js/jsBridge.js')
+   require('./render/spider.js')
+  // require('./js/dataHandler.js')
+  </script>
+</html>

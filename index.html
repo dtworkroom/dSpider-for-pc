@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>dSpider for pc</title>
+    <!--<link rel="stylesheet" href="http://fonts.lug.ustc.edu.cn/css?family=Roboto:400,300,500&subset=latin" media="all">-->
+    <link href="http://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    <!--<script src="http://cdn.bootcss.com/vue/2.0.5/vue.js"></script>-->
+    <script src="js/neat.min.js"></script>
+    <script src="js/vue.js"></script>
+</head>
+<script>
+</script>
+<style>
+
+</style>
+<body>
+<div id="logo">
+    dSpider Dev-Tool
+</div>
+<div id="action">
+    <div id="result">
+        <div><i class="material-icons" style="font-size: 75px; padding-top: 12px; margin-bottom: 15px">dashboard</i>
+            Result Folder
+        </div>
+    </div>
+    <div id="add">
+        <div><i class="material-icons">add</i>Add Task</div>
+    </div>
+    <div id="debugger">
+        <div><i class="material-icons" style="font-size: 65px; padding-top: 20px; margin-bottom: 15px">desktop_mac</i>Open
+            Debugger Window
+        </div>
+    </div>
+</div>
+<div style="padding: 40px">
+    <table id="table">
+        <template v-for="(item, index) in items">
+            <tr draggable="true" @dragstart="drag($event,index)" @drop="drop($event,index)"
+                @dragover="dragover($event)">
+                <td><input type="text" v-model="item.name" placeholder="input task title"></td>
+                <td>
+                    <form>
+                        <div id="ua">
+
+                            <div>user agent</div>
+                            <input type="radio" id="one" name="ua" value="pc" v-model="item.ua">
+                            <label for="one">pc</label>
+                            <input type="radio" id="two" name="ua" value="mb" v-model="item.ua">
+                            <label for="two">mobile</label>
+                            <br>
+                        </div>
+                        <div>
+                            <div>start url:</div>
+                            <input type="text" draggable="false" v-model="item.start" placeholder="input url rules">
+                        </div>
+                        <div>
+                            <div>script uri:</div>
+                            <input type="text" v-model="item.uri" placeholder="input script uri">
+                            <button @click="open(index,1)"></button>
+                        </div>
+                        <div>
+                            <div>handle script:</div>
+                            <input type="text" v-model="item.handle" placeholder="input handle script">
+                            <button @click="open(index,2)"></button>
+                        </div>
+                        <i class="material-icons" @click="del(index)">delete</i>
+                        <i class="material-icons" @click="go(index)">play_circle_filled</i>
+                    </form>
+                </td>
+            </tr>
+        </template>
+    </table>
+</div>
+</body>
+<script>
+    require("./render/index.js")
+</script>
+</html>

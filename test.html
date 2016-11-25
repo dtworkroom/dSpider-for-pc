@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cmn-Hans">
+    <meta charset="UTF-8">
+    <title>你好</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=0.5,user-scalable=no"/>
+    <meta name="keywords" content="Title">
+    <meta name="description" content="小赢卡贷-邮箱登录">
+    <script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+</head>
+<style>
+    html {
+        font-size: 20px;
+        -webkit-user-select: none;
+    }
+</style>
+<body>
+xxxxx
+<script>
+ bridge.ready(function(){
+     dSpider("test",function(session,env,$){
+         //session.set("taobao",{a:5})
+         session.get("taobao")
+         for(let i= 0;i<20;i++) {
+             session.upload("data"+i);
+         }
+         session.finish();
+     })
+ })
+</script>
+</body>
+</html>
