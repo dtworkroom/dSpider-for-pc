@@ -1,11 +1,10 @@
 {
-  "name": "dSpider-v1.0",
+  "name": "dSpider",
   "version": "1.0.0",
   "description": "dSpider",
   "main": "main.js",
   "scripts": {
-    "start": "./electron .",
-    "win":"electron-packager . --platform=win32  --out=dist/ --overwrite --ignore .idea  --ignore=node_modules/electron-* --ignore=node_modules/.bin --ignore=.git --ignore=result  --ignore=dist --prune",
+    "win":"electron-packager . dSpider --win --out dist --arch=x64 --version 1.4.13 --overwrite --ignore=node_modules --version-string.CompanyName=dSpider --version-string.ProductName=dSpider",
     "mac":"electron-packager . --platform=mas --arch=x64  --out=dist/ --overwrite --ignore .idea  --ignore=node_modules/electron-* --ignore=node_modules/.bin --ignore=.git --ignore=result  --ignore=dist --prune"
   },
   "repository": "https://github.com/dtworkroom/dSpider-for-pc",
@@ -19,6 +18,9 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^1.4.1"
+    "electron": "^1.4.13",
+    "electron-packager": "^8.1.0",
+    "grunt": "^1.0.1",
+    "grunt-electron-installer": "^2.1.0"
   }
 }
